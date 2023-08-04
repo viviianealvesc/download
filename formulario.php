@@ -1,5 +1,20 @@
+<?php 
+   
+   if(isset($_POST['submit'])){
+      include_once('config.php');
+
+      $nome = $_POST['nome'];
+      $email = $_POST['email'];
+      $senha = $_POST['senha'];
+
+      $result = mysqli_query($conexao, "INSERT INTO usuario(nome,email,senha) VALUES ('$nome','$email','$senha')");
+
+      header('Location: login.php');
+   }
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +79,7 @@ body {
 </head>
 <body>
     <div class="box">
-        <form action="home.php" method="POST">
+        <form action="formulario.php" method="POST">
             <label  for="nome">Nome Completo</label>
             <input class="inputText" type="text" name="nome" id="nome" placeholder="Nome" required>
 

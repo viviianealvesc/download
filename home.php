@@ -1,3 +1,30 @@
+<?php
+   session_start();
+   include_once('config.php');//chamamos o código que fizemos para conectar com o banco de dados para cá. 
+
+   // print_r($_SESSION);
+   if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+   {
+       unset($_SESSION['email']);//atraves do unset eu consigo destruir todos esses dados.
+       unset($_SESSION['senha']);
+       header('Location: login.php');
+   }
+   $logado = $_SESSION['email'];
+
+
+   
+   
+   if(isset($_POST['submit'])){
+      include_once('config.php');
+      
+      $arquivo = $_POST['arquivo'];
+    
+
+      $result = mysqli_query($conexao, "INSERT INTO tabela_arquivo(arquivo) VALUES ('$arquivo')");
+   }
+?>
+   
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -70,8 +97,8 @@ a {
         <div class="card"> <!-- "card" é do bootstrap para deixar o layout mais responsivo-->
             <div class="card-boy">
                 <form action="envia.php" method="POST" enctype="multipart/form-data"><!-- "enctype="multipart/form-data" sem isso o seu form não vai funcionar-->
-                    <input class="btn btn-primary file" type="file" name="arquivo"><!--"file" é de arquivos -->
-                    <input class="btn btn-success" type="submit" value="Enviar">
+                    <input class="btn btn-primary file" type="file" name="arquivo" id="arquivo"><!--"file" é de arquivos -->
+                    <input class="btn btn-success" type="submit" id="submit" value="Enviar">
                 </form>
             </div>
         </div>
